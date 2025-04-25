@@ -1,0 +1,16 @@
+1. What do you expect the values of dvd1 and dvd2 to be when the method ends?
+Trả lời:
+Do trong Java, các tham số là truyền tham trị (pass-by-value) – kể cả với object reference. Vì vậy, trong phương thức swap(), việc đổi chỗ o1 và o2 chỉ làm hoán đổi các bản sao của tham chiếu, không ảnh hưởng đến đối tượng gốc.
+=> dvd1 và dvd2 vẫn giữ nguyên giá trị ban đầu sau khi gọi swap().
+
+2. What should the toString() method of DigitalVideoDisc return?
+Trả lời:
+Phương thức toString() nên trả về chuỗi mô tả đầy đủ thông tin của đĩa DVD, ví dụ như:
+"DVD - Title: The Lion King - Category: Animation - Director: Roger Allers - Length: 87 - Cost: 19.95"
+Mục tiêu là giúp người đọc dễ hiểu khi in hoặc log đối tượng DVD.
+
+3. What do you observe when you run the ConcatenationInLoops program?
+Trả lời:
+Khi chạy chương trình ConcatenationInLoops:
+- Dùng String với phép cộng trong vòng lặp (+) rất chậm, vì tạo nhiều đối tượng trung gian.
+- Dùng StringBuilder hoặc StringBuffer giúp chương trình chạy nhanh hơn rõ rệt nhờ nối chuỗi hiệu quả hơn.
