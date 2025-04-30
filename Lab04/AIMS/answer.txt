@@ -1,0 +1,12 @@
+Lab 04 - Answers
+
+1. So sánh AWT và Swing:
+- Top-level Container: AWT dùng Frame, thêm trực tiếp thành phần; Swing dùng JFrame, thêm vào content pane.
+- Tên lớp Thành phần: AWT: Label, TextField; Swing: JLabel, JTextField.
+- Xử lý Sự kiện: Cả hai dùng ActionListener, nhưng Swing hỗ trợ nhiều sự kiện hơn.
+- Giao diện: AWT phụ thuộc hệ điều hành, giao diện đơn giản; Swing độc lập, hiện đại, hỗ trợ Look-and-Feel.
+
+2. Các thay đổi trong Lab 04:
+- Thêm giao diện GUI cho Store Manager với các lớp StoreManagerScreen, MediaStore.
+- Tạo các lớp AddItemToStoreScreen, AddBookToStoreScreen, AddCompactDiscToStoreScreen, AddDigitalVideoDiscToStoreScreen để thêm media.
+- Xử lý sự kiện cho menu bar và nút Play.
