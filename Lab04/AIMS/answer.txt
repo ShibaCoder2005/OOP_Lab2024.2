@@ -1,12 +1,37 @@
 Lab 04 - Answers
 
-1. So sánh AWT và Swing:
-- Top-level Container: AWT dùng Frame, thêm trực tiếp thành phần; Swing dùng JFrame, thêm vào content pane.
-- Tên lớp Thành phần: AWT: Label, TextField; Swing: JLabel, JTextField.
-- Xử lý Sự kiện: Cả hai dùng ActionListener, nhưng Swing hỗ trợ nhiều sự kiện hơn.
-- Giao diện: AWT phụ thuộc hệ điều hành, giao diện đơn giản; Swing độc lập, hiện đại, hỗ trợ Look-and-Feel.
+1. So sánh AWT và Swing dựa trên top-level container, tên lớp của các thành phần, xử lý sự kiện, và giao diện.
+   - Top-level Container: AWT sử dụng Frame, các thành phần được thêm trực tiếp vào Frame; Swing sử dụng JFrame, các thành phần phải được thêm vào content pane (getContentPane()).
+   - Tên lớp Thành phần: AWT sử dụng Label, TextField, Button; Swing sử dụng JLabel, JTextField, JButton.
+   - Xử lý Sự kiện: Cả AWT và Swing đều sử dụng ActionListener để xử lý sự kiện, nhưng Swing hỗ trợ nhiều loại sự kiện hơn và có các listener bổ sung (như MouseListener, KeyListener).
+   - Giao diện (Look-and-Feel): AWT phụ thuộc vào hệ điều hành, giao diện đơn giản và không đồng nhất trên các nền tảng; Swing độc lập với hệ điều hành, hỗ trợ giao diện hiện đại và có thể tùy chỉnh Look-and-Feel (như Metal, Nimbus).
 
-2. Các thay đổi trong Lab 04:
-- Thêm giao diện GUI cho Store Manager với các lớp StoreManagerScreen, MediaStore.
-- Tạo các lớp AddItemToStoreScreen, AddBookToStoreScreen, AddCompactDiscToStoreScreen, AddDigitalVideoDiscToStoreScreen để thêm media.
-- Xử lý sự kiện cho menu bar và nút Play.
+2. Sự khác biệt giữa top-level và secondary-level containers là gì?
+   - Top-level container là các container cấp cao nhất, có thể hiển thị độc lập trên màn hình, ví dụ: Frame (AWT), JFrame (Swing). Chúng chứa các thành phần giao diện khác và là nền tảng cho một cửa sổ hoặc ứng dụng.
+   - Secondary-level container là các container nằm bên trong top-level container, không thể hiển thị độc lập, ví dụ: Panel (AWT), JPanel (Swing). Chúng được sử dụng để nhóm và tổ chức các thành phần giao diện (như button, label) bên trong top-level container.
+
+3. Bạn đã triển khai ButtonListener trong NumberGrid như thế nào?
+   - Trong NumberGrid, tôi đã triển khai ButtonListener như một lớp nội (inner class) của NumberGrid, implements ActionListener. Khi một nút số (0-9) được nhấn, ButtonListener lấy giá trị của nút (qua getActionCommand()), thêm giá trị này vào JTextField tf. Khi nút "Clear" được nhấn, ButtonListener đặt lại giá trị của tf thành chuỗi rỗng.
+
+4. Bạn đã xử lý sự kiện cho menu bar trong StoreManagerScreen như thế nào?
+   - Trong StoreManagerScreen, tôi đã tạo menu bar với menu "Options" chứa hai mục chính: "View store" và submenu "Update Store". Submenu "Update Store" có các mục "Add Book", "Add CD", "Add DVD", và "Remove Item" (tùy chọn). Tôi đã thêm ActionListener cho từng JMenuItem:
+     - "View store": Hiển thị lại StoreManagerScreen.
+     - "Add Book", "Add CD", "Add DVD": Mở các màn hình tương ứng (AddBookToStoreScreen, AddCompactDiscToStoreScreen, AddDigitalVideoDiscToStoreScreen).
+     - "Remove Item": Mở màn hình RemoveItemFromStoreScreen.
+     - Mỗi ActionListener đóng màn hình hiện tại (nếu có) và mở màn hình mới, sử dụng biến tĩnh currentScreen để quản lý.
+
+5. Bạn đã xử lý sự kiện cho nút "Play" trong MediaStore như thế nào?
+   - Trong MediaStore, tôi đã kiểm tra nếu media là instance của Playable (media instanceof Playable). Nếu đúng, tôi hiển thị một JButton "Play". Khi nút "Play" được nhấn, ActionListener sẽ:
+     - Tạo một JDialog để hiển thị thông báo.
+     - Gọi phương thức play() của media (ép kiểu media sang Playable).
+     - Hiển thị thông báo "Media is playing" trong JDialog.
+
+6. Bạn đã tổ chức các màn hình để thêm media (AddBookToStoreScreen, AddCompactDiscToStoreScreen, AddDigitalVideoDiscToStoreScreen) như thế nào?
+   - Tôi đã tạo một lớp trừu tượng AddItemToStoreScreen kế thừa từ JFrame, chứa các thành phần chung: menu bar, các JTextField cho title, category, cost, và nút "Add", "Cancel". Các lớp con kế thừa từ AddItemToStoreScreen:
+     - AddBookToStoreScreen: Chỉ sử dụng các trường cơ bản (title, category, cost), tạo đối tượng Book và thêm vào Store.
+     - AddCompactDiscToStoreScreen: Thêm JTextField cho artist, tạo đối tượng CompactDisc và thêm vào Store.
+     - AddDigitalVideoDiscToStoreScreen: Thêm JTextField cho director và length, tạo đối tượng DigitalVideoDisc và thêm vào Store.
+   - Tôi cũng thêm kiểm tra đầu vào (title không rỗng, cost không âm, v.v.) và hiển thị thông báo thành công bằng JOptionPane.
+
+7. Bạn đã mở rộng thêm tính năng nào cho giao diện Store Manager (nếu có)?
+   - Tôi đã mở rộng giao diện Store Manager bằng cách thêm tính năng "Remove Item". Tôi tạo lớp RemoveItemFromStoreScreen kế thừa từ JFrame, cho phép Store Manager chọn một media từ JComboBox và xóa media đó khỏi Store. Sau khi xóa, màn hình quay lại StoreManagerScreen và hiển thị thông báo thành công bằng JOptionPane.
