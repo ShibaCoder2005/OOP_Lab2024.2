@@ -1,0 +1,18 @@
+1. Xử lý ngoại lệ (Exception Handling):
+- Khối try-catch được sử dụng trong lớp CartController để xử lý các thao tác có thể gây lỗi như xoá media hoặc đặt hàng.
+- Trong lớp Cart.java, nếu số lượng media vượt quá giới hạn (20), một ngoại lệ LimitExceededException sẽ được ném ra.
+- Việc sử dụng cơ chế xử lý ngoại lệ giúp chương trình hoạt động ổn định, tránh gián đoạn và cung cấp thông báo phù hợp cho người dùng khi có lỗi xảy ra.
+
+2. PlayerException:
+- PlayerException là lớp ngoại lệ riêng được xây dựng, kế thừa từ Exception.
+- Ngoại lệ này được ném trong phương thức play() của các lớp DigitalVideoDisc và CompactDisc khi độ dài media không hợp lệ (≤ 0).
+- Cách làm này đảm bảo chỉ các media hợp lệ mới được phát, giúp tránh lỗi logic trong chương trình.
+
+3. equals() và compareTo():
+- Phương thức equals() được override trong lớp Media để so sánh các đối tượng dựa trên tiêu đề (title) và chi phí (cost).
+- Phương thức compareTo() hoặc Comparator được sử dụng để sắp xếp danh sách media theo tiêu đề trước, sau đó theo chi phí.
+- Điều này hỗ trợ so sánh chính xác, phục vụ cho việc sắp xếp và kiểm tra trùng lặp trong giỏ hàng.
+
+4. Biểu đồ phân cấp ngoại lệ:
+- PlayerException là lớp con của Exception, thuộc loại checked exception.
+- Điều này bắt buộc lập trình viên phải xử lý ngoại lệ thông qua try-catch hoặc khai báo throws, giúp chương trình đảm bảo tính an toàn và rõ ràng khi thao tác với media có khả năng phát nội dung.
